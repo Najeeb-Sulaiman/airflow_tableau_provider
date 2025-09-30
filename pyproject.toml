@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "airflow_tableau_provider"
+version = "0.0.1"
+authors = [
+  { name="Najeeb Sulaiman", email="nsulaima@jaguarlandrover.com" },
+]
+description = "Triggers Tableau workbook or datasource extract refresh"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "tableauserverclient>=0.37"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "ruff",
+    "pytest"
+]
+
+[project.urls]
+"Homepage" = "To be specified"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "W",   # pycodestyle
+    "F",   # pyflakes
+    "D",   # pydocstyle
+    "I",   # isort
+    "UP",  # pyupgrade
+    "S",   # flake8-bandit
+    "BLE", # flake8-blind-except
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "ISC", # flake8-implicit-str-concat
+    "G",   # flake8-logging-format
+    "T20", # flake8-print
+    "PT",  # flake8-pytest-style
+    "Q",   # flake8-quotes
+    "RET", # flake8-return
+    "SLF", # flake8-self
+    "SIM", # flake8-simplify
+    "ERA", # eradicte (commented-out code)
+    "PGH", # pygrep-hooks
+    "PL",  # pylint
+    "RUF", # Ruff-specific rules
+]
+
+ignore = [
+    "B905",  # `zip()` without an explicit `strict=` parameter
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D102", "S101"]
+"__init__.py" = ["D104"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/airflow_tableau_provider"]

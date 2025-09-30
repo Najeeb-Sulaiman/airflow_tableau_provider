@@ -1,0 +1,50 @@
+{
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        "@semantic-release/changelog",
+        [
+            "@semantic-release/gitlab",
+            {
+                "gitlabUrl": "https://git-gdd.sdo.jlrmotor.com"
+            }
+        ],
+        [
+            "semantic-release-replace-plugin",
+            {
+                "replacements": [
+                    {
+                        "files": [
+                            "pyproject.toml"
+                        ],
+                        "from": "version = \".*\"",
+                        "to": "version = \"${nextRelease.version}\"",
+                        "results": [
+                            {
+                                "file": "pyproject.toml",
+                                "hasChanged": true,
+                                "numMatches": 1,
+                                "numReplacements": 1
+                            }
+                        ],
+                        "countMatches": true
+                    }
+                ]
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "message": "Release: ${nextRelease.version} :tada: [ci skip] \n\n${nextRelease.notes}",
+                "assets": [
+                    "CHANGELOG.md",
+                    "pyproject.toml"
+                ]
+            }
+        ]
+    ],
+    "branches": [
+        "master",
+        "main"
+    ]
+}
